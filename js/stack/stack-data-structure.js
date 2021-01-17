@@ -1,19 +1,23 @@
 class StackDataStructure {
   constructor() {
-    this.stackControl = [];
-    this.MAX_SIZE = 10;
+    this.stackControl = []
+    this.MAX_SIZE = 10
   }
+
+  display() {}
 
   canPush() {
     // ... your code goes here
   }
 
-  display() {
-    // ... your code goes here
-  }
+  canPop() {}
 
   isEmpty() {
-    // ... your code goes here
+    return !this.stackControl.length
+  }
+
+  isFull() {
+    return this.stackControl.length >= MAX_SIZE
   }
 
   push(item) {
@@ -21,6 +25,8 @@ class StackDataStructure {
   }
 
   pop() {
-    // ... your code goes here
+    if (!this.isEmpty()) {
+      // pop and lock
+    }
   }
 }
