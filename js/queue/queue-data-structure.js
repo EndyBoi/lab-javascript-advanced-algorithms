@@ -22,12 +22,16 @@ class QueueDataStructure {
     if (this.canEnqueue()) {
       this.queueControl.unshift(item)
       return this.queueControl
+    } else {
+      return "Queue Overflow"
     }
-    return "Queue Overflow"
   }
 
   dequeue() {
-    if (this.queueControl.length === 0) return "Queue Underflow"
-    return this.queueControl.pop()
+    if (this.queueControl.length === 0) {
+      return "Queue Underflow"
+    } else {
+      return this.queueControl.pop()
+    }
   }
 }
