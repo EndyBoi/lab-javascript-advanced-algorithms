@@ -4,13 +4,13 @@ class StackDataStructure {
     this.MAX_SIZE = 10
   }
 
+  display() {
+    return this.stackControl
+  }
+
   canPush() {
     if (this.stackControl.length === this.MAX_SIZE) return false
     return true
-  }
-
-  display() {
-    return this.stackControl
   }
 
   isEmpty() {
