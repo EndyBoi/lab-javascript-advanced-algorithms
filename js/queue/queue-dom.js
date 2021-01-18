@@ -1,37 +1,72 @@
-const queueUL = document.querySelector('.list-queue');
-const queueInput = document.querySelector('.queue-input');
-const warningTopQueue = document.querySelector('#queue-container .warning-top');
-const warningBottomQueue = document.querySelector('#queue-container .warning-bottom');
-const addQueue = document.querySelector('.btn-add-queue');
-const dequeue = document.querySelector('.btn-take-dequeue');
+// console.dir(document)
+const queueUL = document.querySelector(".list-queue")
+const queueInput = document.querySelector(".queue-input")
+// const container = document.getElementById("container")
+const warningTopQueue = document.querySelector("#queue-container .warning-top")
+const warningBottomQueue = document.querySelector(
+  "#queue-container .warning-bottom"
+)
+const addQueue = document.querySelector(".btn-add-queue")
+const dequeue = document.querySelector(".btn-take-dequeue")
 
-const queue = new QueueDataStructure();
+const sizeStructure = 30
+const queue = new QueueDataStructure(sizeStructure)
 
 const clearQueueInput = () => {
-  // ... your code goes here
-};
+  queueInput.value = ""
+}
 
 const generateListQueue = () => {
-  // ... your code goes here
-};
+  warningTopQueue.style.display = "none"
+  warningBottomQueue.style.display = "none"
+  queueUL.innerHTML = ""
 
-generateListQueue();
+  let length = queue.display().length
+  let size = sizeStructure - length
 
-const generateWarningQueue = type => {
-  if (type === 'underflow') {
-    // ... your code goes here
-  } else if (type === 'overflow') {
-    // ... your code goes here
+  queue.display().forEach((item) => {
+    let queue = document.createElement("li")
+
+    queue.className = "active"
+    queue.innerText = item
+    queueUL.appendChild(queue)
+  })
+  for (let i = 0; i < size; i++) {
+    let queue = document.createElement("li")
+
+    queue.className = "inactive"
+    queue.innerHTML = ""
+    queueUL.appendChild(queue)
   }
-};
+}
+generateListQueue()
+
+const generateWarningQueue = (type) => {
+  if (type === "underflow") {
+    warningBottomQueue.style.display = "block"
+    warningBottomQueue.innerText = type
+  } else if (type === "overflow") {
+    warningTopQueue.style.display = "block"
+    warningTopQueue.innerText = type
+  }
+}
 
 const addToQueue = () => {
-  // ... your code goes here
-};
+  if (queue.enqueue(queueInput.value) === "Queue Overflow") {
+    generateWarningQueue("overflow")
+  } else {
+    clearQueueInput()
+    generateListQueue()
+  }
+}
 
 const removeFromQueue = () => {
-  // ... your code goes here
-};
+  if (queue.dequeue() === "Queue Underflow") {
+    generateWarningQueue("underflow")
+  } else {
+    generateListQueue()
+  }
+}
 
-addQueue.addEventListener('click', addToQueue);
-dequeue.addEventListener('click', removeFromQueue);
+addQueue.addEventListener("click", addToQueue)
+dequeue.addEventListener("click", removeFromQueue)
